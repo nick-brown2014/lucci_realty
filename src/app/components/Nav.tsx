@@ -56,7 +56,7 @@ const Nav = () => {
                 isScrolled ? 'text-black' : 'text-white'
               }`}
             >
-              YOUR APP NAME
+              HOME
             </Link>
 
             {/* Navigation Links */}
@@ -68,23 +68,6 @@ const Nav = () => {
                 } ${isActive('/search') ? 'text-primary' : ''}`}
               >
                 Search
-              </Link>
-              <Link
-                href='/buying'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                  isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/buying') ? 'text-primary' : ''}`}
-              >
-                Buy
-              </Link>
-              
-              <Link
-                href='/selling'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                  isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/selling') ? 'text-primary' : ''}`}
-              >
-                Sell
               </Link>
               <Link
                 href='/about'
@@ -123,24 +106,6 @@ const Nav = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Search
-                </Link>
-                <Link
-                  href='/buying'
-                  className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                    isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/buying') ? 'text-primary' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Buy
-                </Link>
-                <Link
-                  href='/selling'
-                  className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                    isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/selling') ? 'text-primary' : ''}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Sell
                 </Link>
                 <Link
                   href='/about'

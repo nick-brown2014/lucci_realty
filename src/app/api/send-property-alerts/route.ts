@@ -126,7 +126,7 @@ export async function GET(request: NextRequest) {
 
         // Send consolidated email using Resend
         const { error } = await resend.emails.send({
-          from: 'Fred Porter Real Estate <noreply@alerts.nocorealtor.com>',
+          from: 'TODO: NAME <noreply@alerts.domain.com>',
           to: [user.email],
           subject: `${totalProperties} New ${totalProperties === 1 ? 'Listing' : 'Listings'} Just Hit the Market!`,
           react: PropertyAlertEmail({

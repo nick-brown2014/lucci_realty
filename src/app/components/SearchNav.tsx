@@ -19,7 +19,7 @@ const SearchNav = () => {
             href='/'
             className='text-xl font-bold tracking-wide hover:text-primary transition text-black'
           >
-            PORTER REAL ESTATE
+            HOME
           </Link>
 
           {/* Navigation Links */}
@@ -31,29 +31,6 @@ const SearchNav = () => {
               }`}
             >
               Search
-            </Link>
-            <Link
-              href='/buying'
-              className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                isActive('/buying') ? 'text-primary' : ''
-              }`}
-            >
-              Buy
-            </Link>
-            <Link
-              href='/selling'
-              className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                isActive('/selling') ? 'text-primary' : ''
-              }`}
-            >
-              Sell
-            </Link>
-            <Link
-                target='_blank'
-                href='https://www.showingnew.com/nocorealtor'
-                className='hover:text-primary transition uppercase tracking-wide text-sm text-black'
-              >
-                New Construction
             </Link>
             <Link
               href='/about'
@@ -92,34 +69,6 @@ const SearchNav = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Search
-              </Link>
-              <Link
-                href='/buying'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                  isActive('/buying') ? 'text-primary' : ''
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Buy
-              </Link>
-              <Link
-                href='/selling'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                  isActive('/selling') ? 'text-primary' : ''
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sell
-              </Link>
-              <Link
-                target='_blank'
-                href='https://www.showingnew.com/nocorealtor'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                  isActive('/selling') ? 'text-primary' : ''
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                New Construction
               </Link>
               <Link
                 href='/about'

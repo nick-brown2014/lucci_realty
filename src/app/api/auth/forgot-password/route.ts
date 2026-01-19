@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     const result = await resend.emails.send({
       from: fromEmail,
       to: [email],
-      subject: 'Reset Your Password - Porter Real Estate',
+      subject: 'Reset Your Password - TODO: NAME',
       html: `
         <!DOCTYPE html>
         <html>
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
               <p style="margin-bottom: 20px;">Hello ${user.firstName},</p>
 
               <p style="margin-bottom: 20px;">
-                We received a request to reset your password for your Porter Real Estate account.
+                We received a request to reset your password for your TODO: NAME account.
                 Click the button below to create a new password:
               </p>
 
@@ -103,8 +103,8 @@ export async function POST(request: NextRequest) {
               <hr style="border: none; border-top: 1px solid #dee2e6; margin: 30px 0;">
 
               <p style="font-size: 12px; color: #6c757d;">
-                Porter Real Estate<br>
-                Northern Colorado's Real Estate Experts
+                TODO: TITLE<br>
+                TODO: TAGLINE
               </p>
             </div>
           </body>
