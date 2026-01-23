@@ -83,6 +83,9 @@ const DrawingManager = ({ enabled, onRectangleComplete, onDrawingCancelled }: Dr
     }
   }, [map, isLibraryLoaded, onRectangleComplete])
 
+  // Toggle drawing mode based on enabled prop. When enabled, activates rectangle
+  // drawing mode so user can draw a search area. When disabled, exits drawing
+  // mode and cleans up any in-progress rectangle overlay.
   useEffect(() => {
     if (!drawingManagerRef.current || !isLibraryLoaded) return
 
