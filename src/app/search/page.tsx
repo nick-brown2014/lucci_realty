@@ -7,12 +7,14 @@ import SavedSearchesModal from "../components/SavedSearchesModal"
 import { useAuth } from '@/contexts/AuthContext'
 import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps'
 import useMapDisplay, { Listing } from '../hooks/useMapDisplay'
-import ListingMarker from '../components/map/ListingMarker'
+import ClusteredMarkers from '../components/map/MarkerClusterer'
+import DrawingManager from '../components/map/DrawingManager'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import ListingTile from "../components/map/ListingTile"
 import PlacesAutocomplete from "../components/map/PlacesAutocomplete"
 import { useRouter, useSearchParams } from "next/navigation"
 import { SavedSearch } from "../types/SavedSearch"
+import { MAP_CONFIG } from "@/config/mapConfig"
 
 const MapEventHandler = ({ onIdle }: { onIdle: (map: google.maps.Map) => void }) => {
   const map = useMap()
@@ -70,7 +72,9 @@ const Search = () => {
   const [mapBounds, setMapBounds] = useState<google.maps.LatLngBounds | null>(null)
   const [pendingMapBounds, setPendingMapBounds] = useState<google.maps.LatLngBounds | null>(null)
   const [showSearchAreaButton, setShowSearchAreaButton] = useState(false)
-  const [mapCenter, setMapCenter] = useState({ lat: 40.5853, lng: -105.0844 })
+  const [mapCenter, setMapCenter] = useState(MAP_CONFIG.defaultCenter)
+  const [mapLoading, setMapLoading] = useState(true)
+  const [mapError, setMapError] = useState<string | null>(null)
   const [mapInitialized, setMapInitialized] = useState(false)
   const [priceDropdownOpen, setPriceDropdownOpen] = useState(false)
   const [minPrice, setMinPrice] = useState(0)
@@ -101,9 +105,17 @@ const Search = () => {
   const [initialLocationParam] = useState(() => searchParams.get('location'))
   const [initialSavedSearchParam] = useState(() => searchParams.get('saved'))
   const [hasLoadedSavedSearch, setHasLoadedSavedSearch] = useState(false)
-  const [isLoadingSavedSearch, setIsLoadingSavedSearch] = useState(() => !!searchParams.get('saved') || !!searchParams.get('location'))
+    const [isLoadingSavedSearch, setIsLoadingSavedSearch] = useState(() => !!searchParams.get('saved') || !!searchParams.get('location'))
+    const [isDrawingMode, setIsDrawingMode] = useState(false)
 
-  // Handle location URL parameter on mount
+    const handleDrawingComplete = useCallback((bounds: google.maps.LatLngBounds) => {
+      setMapBounds(bounds)
+      setShowSearchAreaButton(false)
+      setIsDrawingMode(false)
+      setViewingFavorites(false)
+    }, [])
+
+    // Handle location URL parameter on mount
   useEffect(() => {
     if (!initialLocationParam) return
 
@@ -127,12 +139,11 @@ const Search = () => {
                       lng: place.geometry.location.lng()
                     }
 
-                    // Create a 4-mile radius bounds around the location
-                    const radiusInMeters = 4 * 1609.34
+                    // Create a radius bounds around the location using config
                     const center = new google.maps.LatLng(location.lat, location.lng)
                     const circle = new google.maps.Circle({
                       center: center,
-                      radius: radiusInMeters
+                      radius: MAP_CONFIG.searchRadius
                     })
                     const bounds = circle.getBounds()
 
@@ -373,7 +384,10 @@ const Search = () => {
   return (
     <div className='w-full h-full flex-col'>
       <SearchNav />
-      <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
+      <APIProvider 
+        apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
+        onLoad={() => setMapError(null)}
+      >
         <div className='pb-10 pt-12 flex flex-col w-[100vw] items-center'>
 
           {/* Auth section */}
@@ -406,31 +420,27 @@ const Search = () => {
 
           {/* Search Bar and Filters */}
           <div className='w-[90vw] max-w-[1200px] mt-4 flex flex-col md:flex-row gap-3 items-stretch md:items-center'>
-            <PlacesAutocomplete
-              onPlaceSelect={(place, location) => {
-                if (location) {
-                  // Create a 4-mile radius bounds around the selected location
-                  // Using Google Maps geometry library to calculate bounds
-                  const radiusInMeters = 4 * 1609.34 // 4 miles in meters
-                  const center = new google.maps.LatLng(location.lat, location.lng)
+                        <PlacesAutocomplete
+                          onPlaceSelect={(place, location) => {
+                            if (location) {
+                              // Create a radius bounds around the selected location using config
+                              const center = new google.maps.LatLng(location.lat, location.lng)
+                              const circle = new google.maps.Circle({
+                                center: center,
+                                radius: MAP_CONFIG.searchRadius
+                              })
+                              const bounds = circle.getBounds()
 
-                  // Calculate bounds using a circle
-                  const circle = new google.maps.Circle({
-                    center: center,
-                    radius: radiusInMeters
-                  })
-                  const bounds = circle.getBounds()
-
-                  setMapCenter(location)
-                  setMapBounds(bounds)
-                  setSearchQuery('') // Clear search query since we're using bounds
-                } else {
-                  setSearchQuery(place)
-                  setMapBounds(null)
-                }
-                setShowSearchAreaButton(false)
-              }}
-            />
+                              setMapCenter(location)
+                              setMapBounds(bounds)
+                              setSearchQuery('') // Clear search query since we're using bounds
+                            } else {
+                              setSearchQuery(place)
+                              setMapBounds(null)
+                            }
+                            setShowSearchAreaButton(false)
+                          }}
+                        />
             <div className='flex gap-2 flex-wrap md:flex-nowrap items-center'>
               {/* Price Filter Dropdown */}
               <div className='relative' ref={priceDropdownRef}>
@@ -724,46 +734,78 @@ const Search = () => {
             </div>
           )}
 
-          <div className={`flex flex-col md:flex-row w-[90vw] max-w-[1200px] mt-4 transition-opacity ${loading ? 'opacity-70' : 'opacity-100'}`}>
-            <div className='w-full lg:w-[65%] h-[600px] relative'>
-              <Map
-                key={`${mapCenter.lat}-${mapCenter.lng}`}
-                defaultCenter={mapCenter}
-                defaultZoom={12}
-                gestureHandling={'greedy'}
-                disableDefaultUI={false}
-                zoomControl={true}
-                mapId='property-map'
-              >
-                <MapEventHandler onIdle={handleMapIdle} />
-                <MapBoundsHandler
-                  listings={listings}
-                  shouldFit={shouldFitFavorites}
-                  onBoundsApplied={() => {
-                    setIsApplyingFavorites(false)
-                    setShouldFitFavorites(false)
-                  }}
-                />
-                <SavedSearchBoundsHandler
-                  bounds={savedSearchBounds}
-                  onBoundsApplied={() => {
-                    setIsApplyingSavedSearch(false)
-                    setSavedSearchBounds(null)
-                  }}
-                />
-                {listings.map((listing) => (
-                  <ListingMarker key={listing.ListingKey} listing={listing} />
-                ))}
-              </Map>
-              {showSearchAreaButton && (
-                <button
-                  onClick={handleSearchThisArea}
-                  className='absolute top-4 left-1/2 transform -translate-x-1/2 bg-white text-primary md:px-4 md:py-2 px-2 py-1 cursor-pointer rounded-full shadow-lg hover:shadow-xl transition-shadow font-semibold border border-primary z-10 text-sm md:text-base'
-                >
-                  Search this area
-                </button>
-              )}
-            </div>
+                    <div className={`flex flex-col md:flex-row w-[90vw] max-w-[1200px] mt-4 transition-opacity ${loading ? 'opacity-70' : 'opacity-100'}`}>
+                      <div className='w-full lg:w-[65%] h-[600px] relative'>
+                        {mapError ? (
+                          <div className="w-full h-full bg-red-50 flex items-center justify-center rounded-lg">
+                            <p className="text-red-600">Map loading failed: {mapError}</p>
+                          </div>
+                        ) : (
+                          <Map
+                            key={`${mapCenter.lat}-${mapCenter.lng}`}
+                            defaultCenter={mapCenter}
+                            defaultZoom={MAP_CONFIG.defaultZoom}
+                            gestureHandling={'greedy'}
+                            disableDefaultUI={false}
+                            zoomControl={true}
+                            mapId={MAP_CONFIG.mapId.search}
+                            onTilesLoaded={() => setMapLoading(false)}
+                          >
+                            <MapEventHandler onIdle={handleMapIdle} />
+                            <MapBoundsHandler
+                              listings={listings}
+                              shouldFit={shouldFitFavorites}
+                              onBoundsApplied={() => {
+                                setIsApplyingFavorites(false)
+                                setShouldFitFavorites(false)
+                              }}
+                            />
+                            <SavedSearchBoundsHandler
+                              bounds={savedSearchBounds}
+                              onBoundsApplied={() => {
+                                setIsApplyingSavedSearch(false)
+                                setSavedSearchBounds(null)
+                              }}
+                            />
+                                                  {listings.length > 0 && (
+                                                    <ClusteredMarkers listings={listings} />
+                                                  )}
+                                                  <DrawingManager
+                                                    enabled={isDrawingMode}
+                                                    onRectangleComplete={handleDrawingComplete}
+                                                    onDrawingCancelled={() => setIsDrawingMode(false)}
+                                                  />
+                                                </Map>
+                                              )}
+                                              {mapLoading && !mapError && (
+                                                <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-40 rounded-lg">
+                                                  <div className="text-gray-600">Loading map...</div>
+                                                </div>
+                                              )}
+                                              {isDrawingMode && (
+                                                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded-full shadow-lg z-10 text-sm">
+                                                  Draw a rectangle to search area (ESC to cancel)
+                                                </div>
+                                              )}
+                                              {showSearchAreaButton && !isDrawingMode && (
+                                                <button
+                                                  onClick={handleSearchThisArea}
+                                                  className='absolute top-4 left-1/2 transform -translate-x-1/2 bg-white text-primary md:px-4 md:py-2 px-2 py-1 cursor-pointer rounded-full shadow-lg hover:shadow-xl transition-shadow font-semibold border border-primary z-10 text-sm md:text-base'
+                                                >
+                                                  Search this area
+                                                </button>
+                                              )}
+                                              <button
+                                                onClick={() => setIsDrawingMode(!isDrawingMode)}
+                                                className={`absolute bottom-4 right-4 px-3 py-2 rounded-lg shadow-lg z-10 text-sm font-semibold transition ${
+                                                  isDrawingMode 
+                                                    ? 'bg-red-500 text-white hover:bg-red-600' 
+                                                    : 'bg-white text-primary border border-primary hover:bg-gray-50'
+                                                }`}
+                                              >
+                                                {isDrawingMode ? 'Cancel Drawing' : 'Draw Search Area'}
+                                              </button>
+                                            </div>
             
             <div className='w-full lg:w-[35%] md:pl-4 flex flex-col gap-2 mt-6 md:mt-0 max-h-[600px] overflow-y-scroll'>
             {listings.length === 0 ? (

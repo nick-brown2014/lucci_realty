@@ -37,18 +37,18 @@ const ListingMarker = ({ listing }: ListingMarkerProps) => {
 
   return (
     <>
-      <AdvancedMarker
-        ref={markerRef}
-        position={{ lat: listing.Latitude, lng: listing.Longitude }}
-        onMouseEnter={() => setInfoWindowShown(true)}
-        onMouseLeave={() => setInfoWindowShown(false)}
-        onClick={handleMarkerClick}
-        className="cursor-pointer"
-      >
-        <div className="bg-primary text-white px-3 py-1 rounded-full font-bold text-sm shadow-lg hover:bg-secondary transition-colors">
-          {formatPrice(listing.ListPrice)}
-        </div>
-      </AdvancedMarker>
+            <AdvancedMarker
+              ref={markerRef}
+              position={{ lat: listing.Latitude, lng: listing.Longitude }}
+              onMouseEnter={() => setInfoWindowShown(true)}
+              onMouseLeave={() => setInfoWindowShown(false)}
+              onClick={handleMarkerClick}
+              className="cursor-pointer transform transition-transform hover:scale-110"
+            >
+              <div className="bg-primary text-white px-3 py-1 rounded-full font-bold text-sm shadow-lg hover:bg-secondary transition-all duration-200 hover:shadow-xl">
+                {formatPrice(listing.ListPrice)}
+              </div>
+            </AdvancedMarker>
 
       {infoWindowShown && (
         <InfoWindow
