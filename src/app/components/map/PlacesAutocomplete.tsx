@@ -10,13 +10,28 @@ const PlacesAutocomplete = ({ onPlaceSelect }: PlacesAutocompleteProps) => {
   useMapsLibrary('places')
 
   async function handlePlaceSelect(place: google.maps.places.Place) {
-    await place.fetchFields({
-      fields: ['displayName', 'formattedAddress', 'location', 'addressComponents']
-    })
+    try {
+      await place.fetchFields({
+        fields: ['displayName', 'formattedAddress', 'location', 'addressComponents']
+      })
 
-    const address = place.formattedAddress || place.displayName
-    const location = place.location ? { lat: place.location.lat(), lng: place.location.lng() } : undefined
-    onPlaceSelect(address ?? '', location)
+      const address = place.formattedAddress || place.displayName
+      const location = place.location ? { 
+        lat: place.location.lat(), 
+        lng: place.location.lng() 
+      } : undefined
+
+      if (!location) {
+        console.error('Place selection failed: No location data available')
+        onPlaceSelect(address ?? '', undefined)
+        return
+      }
+
+      onPlaceSelect(address ?? '', location)
+    } catch (error) {
+      console.error('Place selection failed:', error)
+      onPlaceSelect('', undefined)
+    }
   }
 
   return (

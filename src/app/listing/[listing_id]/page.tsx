@@ -7,6 +7,10 @@ import Footer from '@/app/components/Footer'
 import Slideshow from '@/app/components/Slideshow'
 import SearchNav from '@/app/components/SearchNav'
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps'
+import { MAP_CONFIG } from '@/config/mapConfig'
+import StreetViewPanorama from '@/app/components/map/StreetViewPanorama'
+
+type MapStyleKey = 'default' | 'satellite' | 'terrain'
 
 type ListingPageProps = {
   params: Promise<{
@@ -20,6 +24,8 @@ const ListingPage = ({ params }: ListingPageProps) => {
   const [isSlideshowOpen, setIsSlideshowOpen] = useState(false)
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [mapStyle, setMapStyle] = useState<MapStyleKey>('default')
+  const [showStreetView, setShowStreetView] = useState(false)
 
   if (!!loading) {
     return (
@@ -413,29 +419,68 @@ const ListingPage = ({ params }: ListingPageProps) => {
               </div>
             </div>
 
-            {/* Map */}
-            {listing.Latitude && listing.Longitude && (
-              <div className='bg-white rounded-lg shadow-md p-6'>
-                <h2 className='text-xl font-bold text-gray-900 mb-4'>Location</h2>
-                <div className='w-full h-64 rounded-lg overflow-hidden'>
-                  <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
-                    <Map
-                      defaultCenter={{ lat: listing.Latitude, lng: listing.Longitude }}
-                      defaultZoom={15}
-                      mapId='listing-detail-map'
-                      disableDefaultUI={true}
-                      zoomControl={true}
-                    >
-                      <AdvancedMarker
-                        position={{ lat: listing.Latitude, lng: listing.Longitude }}
-                      >
-                        <div className='w-6 h-6 bg-primary rounded-full border-4 border-white shadow-lg'></div>
-                      </AdvancedMarker>
-                    </Map>
-                  </APIProvider>
-                </div>
-              </div>
-            )}
+                        {/* Map */}
+                        {listing.Latitude && listing.Longitude && (
+                          <div className='bg-white rounded-lg shadow-md p-6'>
+                            <div className='flex justify-between items-center mb-4'>
+                              <h2 className='text-xl font-bold text-gray-900'>Location</h2>
+                              <div className='flex gap-2'>
+                                <button
+                                  onClick={() => setShowStreetView(!showStreetView)}
+                                  className={`px-3 py-1 text-sm rounded-md transition ${
+                                    showStreetView 
+                                      ? 'bg-primary text-white' 
+                                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                  }`}
+                                >
+                                  {showStreetView ? 'Map View' : 'Street View'}
+                                </button>
+                                {!showStreetView && (
+                                  <select
+                                    value={mapStyle}
+                                    onChange={(e) => setMapStyle(e.target.value as MapStyleKey)}
+                                    className='px-2 py-1 text-sm border border-gray-300 rounded-md bg-white'
+                                  >
+                                    <option value="default">Default</option>
+                                    <option value="satellite">Satellite</option>
+                                    <option value="terrain">Terrain</option>
+                                  </select>
+                                )}
+                              </div>
+                            </div>
+                            <div className='w-full h-64 rounded-lg overflow-hidden'>
+                              <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}>
+                                {showStreetView ? (
+                                  <Map
+                                    defaultCenter={{ lat: listing.Latitude, lng: listing.Longitude }}
+                                    defaultZoom={MAP_CONFIG.detailZoom}
+                                    mapId={MAP_CONFIG.mapId.detail}
+                                    streetViewControl={false}
+                                  >
+                                    <StreetViewPanorama
+                                      position={{ lat: listing.Latitude, lng: listing.Longitude }}
+                                    />
+                                  </Map>
+                                ) : (
+                                  <Map
+                                    defaultCenter={{ lat: listing.Latitude, lng: listing.Longitude }}
+                                    defaultZoom={MAP_CONFIG.detailZoom}
+                                    mapId={MAP_CONFIG.mapId.detail}
+                                    mapTypeId={mapStyle === 'satellite' ? 'satellite' : mapStyle === 'terrain' ? 'terrain' : 'roadmap'}
+                                    disableDefaultUI={true}
+                                    zoomControl={true}
+                                  >
+                                    <AdvancedMarker
+                                      position={{ lat: listing.Latitude, lng: listing.Longitude }}
+                                    >
+                                      <div className='w-6 h-6 bg-primary rounded-full border-4 border-white shadow-lg'></div>
+                                    </AdvancedMarker>
+                                  </Map>
+                                )}
+                              </APIProvider>
+                            </div>
+                          </div>
+                        )}
 
             {/* HOA Information */}
             {listing.AssociationYN && listing.AssociationFee && (
