@@ -50,7 +50,7 @@ export default function NewHome() {
             Lucci | Signature Homes
           </h1>
           <p className='text-white text-xl md:text-2xl mb-12 tracking-wide'>
-            It's all Lucci!
+            It&apos;s all Lucci!
           </p>
 
           {/* Search Button */}
