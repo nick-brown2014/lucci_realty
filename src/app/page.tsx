@@ -46,11 +46,11 @@ export default function NewHome() {
         {/* Hero Content Section */}
         <div className='relative w-full h-screen flex items-center justify-center'>
           <div className='text-center px-6'>
-          <h1 className='text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6'>
-            TODO: NAME
+          <h1 className='text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 uppercase'>
+            Lucci | Signature Homes
           </h1>
           <p className='text-white text-xl md:text-2xl mb-12 tracking-wide'>
-            TODO: TAGLINE
+            It's all Lucci!
           </p>
 
           {/* Search Button */}
@@ -74,14 +74,7 @@ export default function NewHome() {
             Content here
           </h2>
           <div className='w-full min-h-64 flex flex-col items-center lg:items-stretch lg:flex-row max-w-4xl mt-8'>
-            <p>More content here</p>
-          </div>
-
-          {/* Reviews Slider */}
-          <div className='w-full max-w-7xl mt-46 lg:mt-24'>
-            <div className='relative p-8 lg:p-12 flex items-center min-h-64'>
-              <p>More content here</p>
-            </div>
+            
           </div>
 
         </div>

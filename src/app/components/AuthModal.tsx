@@ -387,7 +387,7 @@ const AuthModal = ({ isOpen, onClose, initialEmail, initialEmailOptIn }: AuthMod
                 className='mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary cursor-pointer'
               />
               <label htmlFor='emailOptIn' className='ml-3 text-xs text-gray-600'>
-                I agree to be contacted by TODO: NAME via call, email, and text for real estate services.
+                I agree to be contacted by Lucci Living via call, email, and text for real estate services.
                 To opt out, you can reply &apos;stop&apos; at any time or reply &apos;help&apos; for assistance.
                 You can also click the unsubscribe link in the emails.
                 Message and data rates may apply. Message frequency may vary.

@@ -17,9 +17,9 @@ const SearchNav = () => {
           {/* Logo */}
           <Link
             href='/'
-            className='text-xl font-bold tracking-wide hover:text-primary transition text-black'
+            className='text-xl font-bold tracking-wide hover:text-primary transition text-black uppercase'
           >
-            HOME
+            Lucci Living
           </Link>
 
           {/* Navigation Links */}
@@ -33,12 +33,12 @@ const SearchNav = () => {
               Search
             </Link>
             <Link
-              href='/about'
+              href='/contact'
               className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                isActive('/about') ? 'text-primary' : ''
+                isActive('/contact') ? 'text-primary' : ''
               }`}
             >
-              About
+              Contact
             </Link>
           </div>
 
@@ -71,13 +71,13 @@ const SearchNav = () => {
                 Search
               </Link>
               <Link
-                href='/about'
+                href='/contact'
                 className={`hover:text-primary transition uppercase tracking-wide text-sm text-black ${
-                  isActive('/about') ? 'text-primary' : ''
+                  isActive('/contact') ? 'text-primary' : ''
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                About
+                Contact
               </Link>
             </div>
           </div>

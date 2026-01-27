@@ -8,7 +8,6 @@ import { useAuth } from '@/contexts/AuthContext'
 import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps'
 import useMapDisplay, { Listing } from '../hooks/useMapDisplay'
 import ClusteredMarkers from '../components/map/MarkerClusterer'
-import DrawingManager from '../components/map/DrawingManager'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import ListingTile from "../components/map/ListingTile"
 import PlacesAutocomplete from "../components/map/PlacesAutocomplete"
@@ -106,14 +105,6 @@ const Search = () => {
   const [initialSavedSearchParam] = useState(() => searchParams.get('saved'))
   const [hasLoadedSavedSearch, setHasLoadedSavedSearch] = useState(false)
     const [isLoadingSavedSearch, setIsLoadingSavedSearch] = useState(() => !!searchParams.get('saved') || !!searchParams.get('location'))
-    const [isDrawingMode, setIsDrawingMode] = useState(false)
-
-    const handleDrawingComplete = useCallback((bounds: google.maps.LatLngBounds) => {
-      setMapBounds(bounds)
-      setShowSearchAreaButton(false)
-      setIsDrawingMode(false)
-      setViewingFavorites(false)
-    }, [])
 
     // Handle location URL parameter on mount
   useEffect(() => {
@@ -770,11 +761,6 @@ const Search = () => {
                                                   {listings.length > 0 && (
                                                     <ClusteredMarkers listings={listings} />
                                                   )}
-                                                  <DrawingManager
-                                                    enabled={isDrawingMode}
-                                                    onRectangleComplete={handleDrawingComplete}
-                                                    onDrawingCancelled={() => setIsDrawingMode(false)}
-                                                  />
                                                 </Map>
                                               )}
                                               {mapLoading && !mapError && (
@@ -782,12 +768,7 @@ const Search = () => {
                                                   <div className="text-gray-600">Loading map...</div>
                                                 </div>
                                               )}
-                                              {isDrawingMode && (
-                                                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-2 rounded-full shadow-lg z-10 text-sm">
-                                                  Draw a rectangle to search area (ESC to cancel)
-                                                </div>
-                                              )}
-                                              {showSearchAreaButton && !isDrawingMode && (
+                                              {showSearchAreaButton && (
                                                 <button
                                                   onClick={handleSearchThisArea}
                                                   className='absolute top-4 left-1/2 transform -translate-x-1/2 bg-white text-primary md:px-4 md:py-2 px-2 py-1 cursor-pointer rounded-full shadow-lg hover:shadow-xl transition-shadow font-semibold border border-primary z-10 text-sm md:text-base'
@@ -795,16 +776,6 @@ const Search = () => {
                                                   Search this area
                                                 </button>
                                               )}
-                                              <button
-                                                onClick={() => setIsDrawingMode(!isDrawingMode)}
-                                                className={`absolute bottom-4 right-4 px-3 py-2 rounded-lg shadow-lg z-10 text-sm font-semibold transition ${
-                                                  isDrawingMode 
-                                                    ? 'bg-red-500 text-white hover:bg-red-600' 
-                                                    : 'bg-white text-primary border border-primary hover:bg-gray-50'
-                                                }`}
-                                              >
-                                                {isDrawingMode ? 'Cancel Drawing' : 'Draw Search Area'}
-                                              </button>
                                             </div>
             
             <div className='w-full lg:w-[35%] md:pl-4 flex flex-col gap-2 mt-6 md:mt-0 max-h-[600px] overflow-y-scroll'>

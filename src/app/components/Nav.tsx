@@ -52,11 +52,11 @@ const Nav = () => {
             {/* Logo */}
             <Link
               href='/'
-              className={`text-xl font-bold tracking-wide hover:text-primary transition ${
+              className={`text-xl font-bold tracking-wide hover:text-primary transition uppercase ${
                 isScrolled ? 'text-black' : 'text-white'
               }`}
             >
-              HOME
+              Lucci Living
             </Link>
 
             {/* Navigation Links */}
@@ -70,12 +70,12 @@ const Nav = () => {
                 Search
               </Link>
               <Link
-                href='/about'
+                href='/contact'
                 className={`hover:text-primary transition uppercase tracking-wide text-sm ${
                   isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/about') ? 'text-primary' : ''}`}
+                } ${isActive('/contact') ? 'text-primary' : ''}`}
               >
-                About
+                Contact
               </Link>
             </div>
 
@@ -108,13 +108,13 @@ const Nav = () => {
                   Search
                 </Link>
                 <Link
-                  href='/about'
+                  href='/contact'
                   className={`hover:text-primary transition uppercase tracking-wide text-sm ${
                     isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/about') ? 'text-primary' : ''}`}
+                  } ${isActive('/contact') ? 'text-primary' : ''}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  About
+                  Contact
                 </Link>
               </div>
             </div>
@@ -123,6 +123,6 @@ const Nav = () => {
       </div>
     </nav>
   )
-}
+ }
 
 export default Nav
