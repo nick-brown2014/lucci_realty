@@ -1,12 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import Footer from './components/Footer'
 import Nav from './components/Nav'
 
 export default function NewHome() {
-  const router = useRouter()
   const [parallaxOffset, setParallaxOffset] = useState(0)
 
   useEffect(() => {
@@ -53,13 +51,6 @@ export default function NewHome() {
             It&apos;s all Lucci!
           </p>
 
-          {/* Search Button */}
-          <button
-            onClick={() => router.push('/search')}
-            className='cursor-pointer bg-transparent border-2 border-white hover:bg-white hover:border-white text-white hover:text-primary px-12 py-4 rounded-full text-lg font-semibold tracking-wide transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105'
-          >
-            Start Your Search
-          </button>
           </div>
         </div>
 
@@ -95,8 +86,7 @@ export default function NewHome() {
           </h2>
           <div className='flex flex-col md:flex-row w-full mt-12 gap-1'>
             <div
-              className='cursor-pointer relative w-full h-64 lg:h-124 overflow-hidden group cursor-pointer border-2 border-gray-200'
-              onClick={() => router.push('search?location=fort-collins')}>
+              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
               <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
               <div className='absolute inset-0 flex items-center justify-center'>
                 <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>
@@ -106,8 +96,7 @@ export default function NewHome() {
             </div>
 
             <div
-              className='cursor-pointer relative w-full h-64 lg:h-124 overflow-hidden group cursor-pointer border-2 border-gray-200'
-              onClick={() => router.push('search?location=denver')}>
+              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
               <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
               <div className='absolute inset-0 flex items-center justify-center'>
                 <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>
@@ -117,8 +106,7 @@ export default function NewHome() {
             </div>
 
             <div
-            className='cursor-pointer relative w-full h-64 lg:h-124 overflow-hidden group cursor-pointer border-2 border-gray-200'
-            onClick={() => router.push('search?location=boulder')}>
+              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
               <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
               <div className='absolute inset-0 flex items-center justify-center'>
                 <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>

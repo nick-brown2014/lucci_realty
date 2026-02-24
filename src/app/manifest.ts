@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Fred Porter Real Estate',
-    short_name: 'NoCo Realtor',
-    description: 'Your ultimate resource to living in Northern Colorado',
+    name: 'Lucci Signature Homes',
+    short_name: 'Lucci Homes',
+    description: 'Lucci Signature Homes',
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',

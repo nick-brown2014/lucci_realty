@@ -62,12 +62,12 @@ const Nav = () => {
             {/* Navigation Links */}
             <div className='hidden md:flex items-center gap-8'>
               <Link
-                href='/search'
+                href='/about'
                 className={`hover:text-primary transition uppercase tracking-wide text-sm ${
                   isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/search') ? 'text-primary' : ''}`}
+                } ${isActive('/about') ? 'text-primary' : ''}`}
               >
-                Search
+                About
               </Link>
               <Link
                 href='/contact'
@@ -99,13 +99,13 @@ const Nav = () => {
             <div className='md:hidden mt-4 pb-4'>
               <div className='flex flex-col gap-4'>
                 <Link
-                  href='/search'
+                  href='/about'
                   className={`hover:text-primary transition uppercase tracking-wide text-sm ${
                     isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/search') ? 'text-primary' : ''}`}
+                  } ${isActive('/about') ? 'text-primary' : ''}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Search
+                  About
                 </Link>
                 <Link
                   href='/contact'

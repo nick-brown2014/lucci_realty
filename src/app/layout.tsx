@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { CookiesProvider } from 'next-client-cookies/server';
-import { Providers } from './providers';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Your App Name | Real Estate Search",
-  description: "Search for homes and properties. Browse listings, save favorites, and find your next home.",
+  title: "Lucci Living",
+  description: "Lucci Signature Homes",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
-    title: "Your App Name | Real Estate Search",
-    description: "Search for homes and properties",
+    title: "Lucci Living",
+    description: "Lucci Signature Homes",
     type: "website",
     locale: "en_US",
   },
@@ -30,11 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <CookiesProvider>
-          <Providers>
-            {children}
-          </Providers>
-        </CookiesProvider>
+        {children}
       </body>
     </html>
   );

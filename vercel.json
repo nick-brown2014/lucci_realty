@@ -1,6 +1,0 @@
-{
-  "crons": [{
-    "path": "/api/send-property-alerts",
-    "schedule": "0 15 * * *"
-  }]
-}
