@@ -16,15 +16,6 @@ const Footer = () => (
           </p>
         </div>
         <div className='flex flex-col gap-2 ml-6 lg:ml-0 lg:self-end max-w-[600px]'>
-          <a
-            href='https://www.flaticon.com/'
-            target='_blank'
-            rel='noopener noreferrer'
-            title='flaticon icons'
-            className='mt-4 text-background text-xs w-full flex'
-          >
-              Icons created by Pixel perfect - Flaticon
-          </a>
           <p className='text-background text-sm block lg:hidden'>
             Built by{' '}
             <a

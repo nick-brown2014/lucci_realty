@@ -25,7 +25,7 @@ export default function NewHome() {
       {/* Hero Background - Fixed position for parallax */}
       <div className='fixed inset-0 z-0 overflow-hidden'>
         <img
-          src='/home-header.jpg'
+          src='/home-header.webp'
           alt='Hero background'
           className='absolute w-full min-h-screen object-cover'
           style={{
@@ -44,91 +44,73 @@ export default function NewHome() {
         {/* Hero Content Section */}
         <div className='relative w-full h-screen flex items-center justify-center'>
           <div className='text-center px-6'>
-          <h1 className='text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 uppercase'>
-            Lucci | Signature Homes
-          </h1>
-          <p className='text-white text-xl md:text-2xl mb-12 tracking-wide'>
-            It&apos;s all Lucci!
-          </p>
-
+            <h1 className='text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 uppercase'>
+              Lucci Signature Homes
+            </h1>
           </div>
         </div>
 
         {/* Realtor Section */}
         <div className='relative bg-white'>
-        <div className='max-w-7xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center'>
-          {/* Section Header */}
-          <h2 className='text-3xl lg:text-5xl tracking-wide'>
-            Section One
-          </h2>
-          <h2 className='text-lg lg:text-xl tracking-wide text-primary mt-2'>
-            Content here
-          </h2>
-          <div className='w-full min-h-64 flex flex-col items-center lg:items-stretch lg:flex-row max-w-4xl mt-8'>
-            
-          </div>
-
-        </div>
-      </div>
-
-      {/* Parallax Gap Section - Shows hero background */}
-      <div className='relative h-64 overflow-hidden' />
-
-
-      {/* Cities Section with Parallax Effect */}
-      <div className='relative z-20 bg-white'>
-        <div className='max-w-9xl mx-auto py-16 lg:py-12 flex flex-col items-center'>
-          <h2 className='text-3xl lg:text-5xl tracking-wide'>
-            Explore Communities
-          </h2>
-          <h2 className='text-lg lg:text-xl tracking-wide text-primary mt-2'>
-            Location of Communities
-          </h2>
-          <div className='flex flex-col md:flex-row w-full mt-12 gap-1'>
-            <div
-              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
-              <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
-              <div className='absolute inset-0 flex items-center justify-center'>
-                <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>
-                  Location One
-                </h3>
+          <div className='max-w-7xl mx-auto px-6 py-16 lg:py-24'>
+            <div className='flex flex-col lg:flex-row items-center gap-12 max-w-5xl mx-auto'>
+              <div className='w-full lg:w-1/2 flex justify-center'>
+                <img
+                  src='/Profile Correction.jpg'
+                  alt='Chris Lucci'
+                  className='rounded-lg shadow-xl w-full max-w-md object-cover'
+                />
               </div>
-            </div>
-
-            <div
-              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
-              <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
-              <div className='absolute inset-0 flex items-center justify-center'>
-                <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>
-                  Location Two
+              <div className='w-full lg:w-1/2'>
+                <h2 className='text-3xl lg:text-5xl tracking-wide mb-2'>
+                  Chris Lucci
+                </h2>
+                <h3 className='text-lg lg:text-xl tracking-wide text-primary mb-6'>
+                  Your Home, Your Way
                 </h3>
-              </div>
-            </div>
-
-            <div
-              className='relative w-full h-64 lg:h-124 overflow-hidden group border-2 border-gray-200'>
-              <div className='absolute inset-0 bg-black' style={{ opacity: 0.4 }} />
-              <div className='absolute inset-0 flex items-center justify-center'>
-                <h3 className='text-white text-4xl lg:text-5xl font-bold tracking-wide'>
-                  Location Three
-                </h3>
+                <p className='text-lg text-gray-700 leading-relaxed mb-4'>
+                  Finding your dream home should be exciting &mdash; not stressful. Chris Lucci is here to take
+                  the hassle out of home buying so you can focus on what matters: discovering the place
+                  you&apos;ll love coming home to.
+                </p>
+                <p className='text-lg text-gray-700 leading-relaxed mb-4'>
+                  With Chris, the process isn&apos;t just smooth &mdash; it&apos;s fun. From your first conversation to
+                  the moment you get your keys, he makes every step feel easy, personal, and genuinely
+                  enjoyable.
+                </p>
+                <p className='text-lg text-gray-700 leading-relaxed mb-8'>
+                  Buying a home should be one of the best experiences of your life, and with Lucci Living at your side, it will be.
+                </p>
+                <a
+                  href='/contact'
+                  className='inline-block bg-primary text-white px-10 py-3 rounded-full text-lg font-semibold tracking-wide transition-all duration-300 shadow-xl hover:shadow-2xl hover:opacity-90 transform hover:scale-105'
+                >
+                  Get Started
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Parallax Gap Section - Shows hero background */}
       <div className='relative h-64 overflow-hidden' />
 
       <div className='relative z-20 bg-white'>
-        <div className='max-w-9xl mx-auto py-16 lg:py-12 flex flex-col items-center min-h-92'>
-          <h2 className='text-3xl lg:text-5xl tracking-wide'>
-            Section Three
+        <div className='max-w-5xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center'>
+          <h2 className='text-3xl lg:text-5xl tracking-wide mb-20'>
+            Featured Listing
           </h2>
+          <img
+            src='/5158VivianSt.jpg'
+            alt='Featured Listing - 5181 Vivian St'
+            className='w-full rounded-lg shadow-xl border border-gray-200'
+          />
         </div>
+      </div>
+
+        {/* Parallax Gap Section - Shows hero background */}
+        <div className='relative h-32 overflow-hidden' />
         <Footer />
-      </div>
 
       </div>
     </div>

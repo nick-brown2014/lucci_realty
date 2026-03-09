@@ -24,16 +24,17 @@ export default function AboutPage() {
     <div className='w-full h-full relative'>
       {/* Hero Background - Fixed position for parallax */}
       <div className='fixed inset-0 z-0 overflow-hidden'>
-        {/* TODO: Replace with about page hero image */}
-        <div
-          className='absolute w-full min-h-screen bg-gray-800'
+        <img
+          src='/mountaincity.webp'
+          alt='Mountain city landscape'
+          className='absolute w-full min-h-screen object-cover'
           style={{
             top: 0,
             transform: `translateY(-${parallaxOffset}px)`,
             height: 'calc(100vh + 400px)'
           }}
         />
-        <div className='absolute inset-0 bg-black' style={{ opacity: 0.5 }} />
+        <div className='absolute inset-0 bg-black' style={{ opacity: 0.6 }} />
       </div>
 
       {/* Content Container */}
@@ -56,11 +57,12 @@ export default function AboutPage() {
         <div className='relative bg-white'>
           <div className='max-w-4xl mx-auto px-6 py-16 lg:py-24'>
             <div className='flex flex-col lg:flex-row gap-12 items-center'>
-              {/* TODO: Add portrait image of Chris */}
               <div className='w-full lg:w-1/2 flex justify-center'>
-                <div className='w-72 h-96 bg-gray-200 rounded-lg flex items-center justify-center'>
-                  <p className='text-gray-400 text-sm'>Image placeholder</p>
-                </div>
+                <img
+                  src='/IMG_1834.jpg'
+                  alt='Chris Lucci'
+                  className='w-full max-w-md rounded-lg shadow-xl object-cover'
+                />
               </div>
               <div className='w-full lg:w-1/2'>
                 <h2 className='text-3xl lg:text-4xl tracking-wide mb-4'>
@@ -83,11 +85,12 @@ export default function AboutPage() {
         <div className='relative z-20 bg-white'>
           <div className='max-w-4xl mx-auto px-6 py-16 lg:py-24'>
             <div className='flex flex-col lg:flex-row-reverse gap-12 items-center'>
-              {/* TODO: Add image (e.g. Chris with clients, a home, etc.) */}
               <div className='w-full lg:w-1/2 flex justify-center'>
-                <div className='w-72 h-96 bg-gray-200 rounded-lg flex items-center justify-center'>
-                  <p className='text-gray-400 text-sm'>Image placeholder</p>
-                </div>
+                <img
+                  src='/IMG_1525.jpg'
+                  alt='Chris Lucci'
+                  className='w-full max-w-md rounded-lg shadow-xl object-cover'
+                />
               </div>
               <div className='w-full lg:w-1/2'>
                 <h2 className='text-3xl lg:text-4xl tracking-wide mb-4'>
