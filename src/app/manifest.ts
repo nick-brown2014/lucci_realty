@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Lucci Signature Homes',
+    name: 'Lucci Living',
     short_name: 'Lucci Homes',
     description: 'Lucci Signature Homes',
     start_url: '/',

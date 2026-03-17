@@ -15,11 +15,12 @@ const SearchNav = () => {
       <div className='max-w-7xl mx-auto px-6 py-4'>
         <div className='flex justify-between items-center'>
           {/* Logo */}
-          <Link
-            href='/'
-            className='text-xl font-bold tracking-wide hover:text-primary transition text-black uppercase'
-          >
-            Lucci Living
+          <Link href='/'>
+            <img
+              src='/lucci-ll-stamp.svg'
+              alt='Lucci Living'
+              className='h-10 w-auto hover:opacity-80 transition'
+            />
           </Link>
 
           {/* Navigation Links */}

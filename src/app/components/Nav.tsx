@@ -44,36 +44,31 @@ const Nav = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         navVisible ? 'translate-y-0' : '-translate-y-full'
-      } ${isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}
+      } ${isScrolled ? 'bg-black shadow-lg' : 'bg-transparent'}`}
     >
       <div className={`${isScrolled ? '' : 'backdrop-blur-sm'}`}>
-        <div className='max-w-7xl mx-auto px-6 py-4'>
+        <div className='max-w-7xl mx-auto px-6'>
           <div className='flex justify-between items-center'>
             {/* Logo */}
-            <Link
-              href='/'
-              className={`text-xl font-bold tracking-wide hover:text-primary transition uppercase ${
-                isScrolled ? 'text-black' : 'text-white'
-              }`}
-            >
-              Lucci Living
+            <Link href='/'>
+              <img
+                src='/lucci-ll-stamp.svg'
+                alt='Lucci Living'
+                className='h-24 w-auto hover:opacity-80 transition'
+              />
             </Link>
 
             {/* Navigation Links */}
             <div className='hidden md:flex items-center gap-8'>
               <Link
                 href='/about'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                  isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/about') ? 'text-primary' : ''}`}
+                className={`hover:text-primary transition uppercase tracking-wide text-sm text-white ${isActive('/about') ? 'text-primary' : ''}`}
               >
                 About
               </Link>
               <Link
                 href='/contact'
-                className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                  isScrolled ? 'text-black' : 'text-white'
-                } ${isActive('/contact') ? 'text-primary' : ''}`}
+                className={`hover:text-primary transition uppercase tracking-wide text-sm text-white ${isActive('/contact') ? 'text-primary' : ''}`}
               >
                 Contact
               </Link>
@@ -82,7 +77,7 @@ const Nav = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden ${isScrolled ? 'text-black' : 'text-white'}`}
+              className='md:hidden text-white'
             >
               <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 {mobileMenuOpen ? (
@@ -100,18 +95,14 @@ const Nav = () => {
               <div className='flex flex-col gap-4'>
                 <Link
                   href='/about'
-                  className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                    isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/about') ? 'text-primary' : ''}`}
+                  className={`hover:text-primary transition uppercase tracking-wide text-sm text-white ${isActive('/about') ? 'text-primary' : ''}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   About
                 </Link>
                 <Link
                   href='/contact'
-                  className={`hover:text-primary transition uppercase tracking-wide text-sm ${
-                    isScrolled ? 'text-black' : 'text-white'
-                  } ${isActive('/contact') ? 'text-primary' : ''}`}
+                  className={`hover:text-primary transition uppercase tracking-wide text-sm text-white ${isActive('/contact') ? 'text-primary' : ''}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact

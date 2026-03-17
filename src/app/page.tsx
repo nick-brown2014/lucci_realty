@@ -34,7 +34,7 @@ export default function NewHome() {
             height: 'calc(100vh + 400px)'
           }}
         />
-        <div className='absolute inset-0 bg-black' style={{ opacity: 0.6 }} />
+        <div className='absolute inset-0 bg-black' style={{ opacity: 0.8 }} />
       </div>
 
       {/* Content Container */}
@@ -44,9 +44,11 @@ export default function NewHome() {
         {/* Hero Content Section */}
         <div className='relative w-full h-screen flex items-center justify-center'>
           <div className='text-center px-6'>
-            <h1 className='text-white text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 uppercase'>
-              Lucci Signature Homes
-            </h1>
+            <img
+              src='/lucci-title.svg'
+              alt='Lucci Living'
+              className='w-[350px] md:w-[600px] lg:w-[1050px] h-auto mx-auto'
+            />
           </div>
         </div>
 
@@ -56,7 +58,7 @@ export default function NewHome() {
             <div className='flex flex-col lg:flex-row items-center gap-12 max-w-5xl mx-auto'>
               <div className='w-full lg:w-1/2 flex justify-center'>
                 <img
-                  src='/Profile Correction.jpg'
+                  src='/lucci-profile.png'
                   alt='Chris Lucci'
                   className='rounded-lg shadow-xl w-full max-w-md object-cover'
                 />

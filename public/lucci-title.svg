@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;1,200&amp;family=Montserrat:wght@200;300&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Transparent background — nothing here intentionally -->
+
+  <!-- Corner marks -->
+  <line x1="20" y1="20" x2="46" y2="20" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="20" y1="20" x2="20" y2="46" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="780" y1="20" x2="754" y2="20" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="780" y1="20" x2="780" y2="46" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="20" y1="280" x2="46" y2="280" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="20" y1="280" x2="20" y2="254" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="780" y1="280" x2="754" y2="280" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+  <line x1="780" y1="280" x2="780" y2="254" stroke="rgba(201,169,110,0.45)" stroke-width="1"/>
+
+  <!-- Eyebrow -->
+  <text x="400" y="72" font-family="Montserrat, sans-serif" font-size="9" font-weight="300" letter-spacing="8" fill="rgba(201,169,110,0.55)" text-anchor="middle" text-transform="uppercase">DENVER · COLORADO · REAL ESTATE</text>
+
+  <!-- LUCCI — main title -->
+  <text x="400" y="178" font-family="Cormorant Garamond, Georgia, serif" font-size="110" font-weight="200" letter-spacing="28" fill="white" text-anchor="middle">LUCCI</text>
+
+  <!-- Gold hairline rule -->
+  <line x1="80" y1="196" x2="720" y2="196" stroke="rgba(201,169,110,0.5)" stroke-width="0.75"/>
+
+  <!-- LIVING — sub -->
+  <text x="400" y="222" font-family="Montserrat, sans-serif" font-size="11" font-weight="200" letter-spacing="14" fill="rgba(201,169,110,0.65)" text-anchor="middle">LIVING</text>
+
+  <!-- Tagline -->
+  <text x="400" y="258" font-family="Cormorant Garamond, Georgia, serif" font-size="13" font-style="italic" font-weight="300" fill="rgba(255,255,255,0.22)" text-anchor="middle">Real estate worth talking about.</text>
+</svg>
